@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT Birth Chart Generator</title>
+</head>
+<body>
+    <h1>Enter Your Birth Info</h1>
+    <form method="POST">
+        <label>Full Name:</label><br>
+        <input type="text" name="name" required><br><br>
+        <label>Birth Date (YYYY-MM-DD):</label><br>
+        <input type="text" name="birth_date" required><br><br>
+        <label>Birth Time (HH:MM in 24hr format):</label><br>
+        <input type="text" name="birth_time" required><br><br>
+        <label>Place of Birth:</label><br>
+        <input type="text" name="birth_place" required><br><br>
+        <input type="submit" value="Generate Chart">
+    </form>
+
+    {% if chart %}
+        <h2>Results for {{ chart.name }}</h2>
+        <p><strong>Moon Phase:</strong> {{ chart.moon_phase }} ({{ chart.moon_phase_angle }}°)</p>
+        <ul>
+        {% for planet, sign in chart.chart.items() %}
+            <li><strong>{{ planet }}:</strong> {{ sign }}</li>
+        {% endfor %}
+        </ul>
+
+        {% if chart.interpretation %}
+            <h3>GPT Interpretation</h3>
+            <p>{{ chart.interpretation }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
