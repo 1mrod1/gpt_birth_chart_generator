@@ -6,22 +6,39 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    chart_data = None
+    full_name = ""
+    chart = {}
+    moon_phase = ""
+    moon_phase_angle = ""
+    interpretation = ""
+    error = ""
+
     if request.method == "POST":
-        name = request.form["name"]
-        birth_date = request.form["birth_date"]
-        birth_time = request.form["birth_time"]
-        birth_place = request.form["birth_place"]
+        full_name = request.form.get("name", "")
+        birth_date = request.form.get("birth_date", "")
+        birth_time = request.form.get("birth_time", "")
+        birth_place = request.form.get("birth_place", "")
 
         try:
-            chart_data = generate_chart(name, birth_date, birth_time, birth_place)
+            raw = generate_chart(full_name, birth_date, birth_time, birth_place)
+            chart = raw.get("chart", {})
+            moon_phase = raw.get("moon_phase", "")
+            moon_phase_angle = raw.get("moon_phase_angle", "")
             api_key = os.getenv("OPENAI_API_KEY")
             if api_key:
-                chart_data["interpretation"] = interpret_chart_with_gpt(chart_data, api_key)
+                interpretation = interpret_chart_with_gpt(raw, api_key)
         except Exception as e:
-            chart_data = {"error": str(e)}
+            error = str(e)
 
-    return render_template("index.html", chart=chart_data)
+    return render_template(
+        "index.html",
+        full_name=full_name,
+        chart=chart,
+        moon_phase=moon_phase,
+        moon_phase_angle=moon_phase_angle,
+        interpretation=interpretation,
+        error=error
+    )
 
 if __name__ == "__main__":
     from os import environ
