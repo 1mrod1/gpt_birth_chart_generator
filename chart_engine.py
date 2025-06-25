@@ -52,11 +52,19 @@ def generate_chart(name, bd, bt, bp):
     jd = swe.julday(loc.year, loc.month, loc.day,
                     loc.hour + loc.minute / 60.0)
     frac, ang = get_moon_phase(jd)
+        # Map the sun–moon angle to one of 8 lunar phases
     phases = [
-        "New Moon", "First Quarter", "Waxing Gibbous", "Full Moon",
-        "Waning Gibbous", "Last Quarter", "Waning Crescent"
+        "New Moon",
+        "Waxing Crescent",
+        "First Quarter",
+        "Waxing Gibbous",
+        "Full Moon",
+        "Waning Gibbous",
+        "Last Quarter",
+        "Waning Crescent"
     ]
-    idx = int((ang % 360) // 45)
+    # Add 22.5° so each phase spans ±22.5° around its midpoint
+    idx = int(((angle + 22.5) % 360) // 45)
     phase = phases[idx]
 
     return {
