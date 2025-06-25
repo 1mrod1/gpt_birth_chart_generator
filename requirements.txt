@@ -1,6 +1,6 @@
 Flask==3.0.3
 flatlib==0.2.0
-swisseph==2.10.02
+pyswisseph
 geopy==2.4.1
 timezonefinder==6.4.1
 pytz==2024.1
