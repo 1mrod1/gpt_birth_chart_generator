@@ -1,51 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>GPT Birth Chart Generator</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    span.s1 {font-kerning: none}
+  </style>
 </head>
 <body>
-  <h1>Enter Your Birth Info</h1>
-  <form method="POST">
-    <label>Full Name:</label><br>
-    <input type="text" name="name" required><br><br>
-
-    <label>Birth Date (YYYY-MM-DD):</label><br>
-    <input type="text" name="birth_date" required><br><br>
-
-    <label>Birth Time (HH:MM):</label><br>
-    <input type="text" name="birth_time" required><br><br>
-
-    <label>Place of Birth:</label><br>
-    <input type="text" name="birth_place" required><br><br>
-
-    <input type="submit" value="Generate Chart">
-  </form>
-
-  <hr>
-
-  {% if error %}
-    <p style="color: red;"><strong>Error:</strong> {{ error }}</p>
-  {% endif %}
-
-  {% if chart %}
-    <h2>Results for {{ full_name }}</h2>
-
-    {% if moon_phase %}
-      <p><strong>Moon Phase:</strong> {{ moon_phase }}{% if moon_phase_angle %} ({{ moon_phase_angle }}°){% endif %}</p>
-    {% endif %}
-
-    <h3>Birth Chart:</h3>
-    <ul>
-      {% for planet, sign in chart.items() %}
-        <li><strong>{{ planet }}:</strong> {{ sign }}</li>
-      {% endfor %}
-    </ul>
-
-    {% if interpretation %}
-      <h3>GPT Interpretation</h3>
-      <p>{{ interpretation }}</p>
-    {% endif %}
-  {% endif %}
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;!DOCTYPE html&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;title&gt;Birth Chart&lt;/title&gt;&lt;/head&gt;&lt;body&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;h1&gt;Enter Your Birth Info&lt;/h1&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;form method="POST"&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b><span class="Apple-converted-space">  </span>&lt;input name="name" placeholder="Full Name" required&gt;&lt;br&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b><span class="Apple-converted-space">  </span>&lt;input name="birth_date" placeholder="YYYY-MM-DD" required&gt;&lt;br&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b><span class="Apple-converted-space">  </span>&lt;input name="birth_time" placeholder="HH:MM" required&gt;&lt;br&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b><span class="Apple-converted-space">  </span>&lt;input name="birth_place" placeholder="City, Country" required&gt;&lt;br&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b><span class="Apple-converted-space">  </span>&lt;button type="submit"&gt;Generate&lt;/button&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;/form&gt;&lt;hr&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>{% if error %}&lt;p style="color:red"&gt;{{error}}&lt;/p&gt;{% endif %}</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>{% if chart %}</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;h2&gt;Results for {{full_name}}&lt;/h2&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;p&gt;Moon Phase: {{moon_phase}} ({{moon_phase_angle}}°)&lt;/p&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;ul&gt;{% for k,v in chart.items() %}&lt;li&gt;{{k}}: {{v}}&lt;/li&gt;{% endfor %}&lt;/ul&gt;</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>{% if interpretation %}&lt;h3&gt;GPT Interpretation:&lt;/h3&gt;&lt;p&gt;{{interpretation}}&lt;/p&gt;{% endif %}</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>{% endif %}</b></span></h1>
+<h1 style="margin: 0.0px 0.0px 16.1px 0.0px; font: 24.0px Times; -webkit-text-stroke: #000000"><span class="s1"><b>&lt;/body&gt;&lt;/html&gt;</b></span></h1>
 </body>
 </html>
