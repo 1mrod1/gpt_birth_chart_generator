@@ -3,7 +3,7 @@ from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib import const
 from geopy.geocoders import Nominatim
-from timezonefinder import TimezoneFinder
+import requests
 import pytz
 import datetime
 import swisseph as swe
