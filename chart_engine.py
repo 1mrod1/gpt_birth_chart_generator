@@ -63,9 +63,9 @@ def generate_chart(name, bd, bt, bp):
         "Last Quarter",
         "Waning Crescent"
     ]
-    # Add 22.5° so each phase spans ±22.5° around its midpoint
-    idx = int(((angle + 22.5) % 360) // 45)
-    phase = phases[idx]
+    # Offset by 22.5° so each 45° slice centers on its phase
+    idx = int(((ang + 22.5) % 360) // 45)
+    phase_name = phases[idx]
 
     return {
         "chart": data,
