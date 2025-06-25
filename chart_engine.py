@@ -45,7 +45,7 @@ def generate_chart(name, birth_date, birth_time, birth_place):
 
     date_str = dt_local.strftime("%Y/%m/%d")
     time_str = dt_local.strftime("%H:%M")
-    pos = GeoPos(str(lat), str(lon))
+    pos = GeoPos(lat, lon)
     date_obj = Datetime(date_str, time_str, tz_name)
     chart = Chart(date_obj, pos)
 
