@@ -12,14 +12,12 @@ import swisseph as swe
 import math
 import openai
 
-# Point this at your ephemeris data folder (or install via pyswisseph)
-swe.set_ephe_path('.')
+swe.set_ephe_path('.')  # Ephemeris data folder
 
 def get_geo_and_tz(city_name):
     geo = Nominatim(user_agent="astro_gpt").geocode(city_name)
     if not geo:
         raise ValueError(f"Location not found for: {city_name}")
-    # Query a timezone API instead of using TimezoneFinder
     resp = requests.get(
         "https://timeapi.io/api/TimeZone/coordinate",
         params={"latitude": geo.latitude, "longitude": geo.longitude}
@@ -38,29 +36,36 @@ def get_moon_phase(jd):
     return fraction, diff
 
 def generate_chart(name, birth_date, birth_time, birth_place):
+    # Geocode and lookup timezone
     lat, lon, tz_name = get_geo_and_tz(birth_place)
     tz = pytz.timezone(tz_name)
+    # Parse and localize birth datetime
     dt = datetime.datetime.strptime(f"{birth_date} {birth_time}", "%Y-%m-%d %H:%M")
     dt_local = tz.localize(dt)
 
+    # Prepare Flatlib Datetime with UTC offset (±HH:MM)
     date_str = dt_local.strftime("%Y/%m/%d")
     time_str = dt_local.strftime("%H:%M")
+    offset_raw = dt_local.strftime("%z")         # e.g. "-0700"
+    tz_offset = f"{offset_raw[:3]}:{offset_raw[3:]}"  # "-07:00"
+
     pos = GeoPos(lat, lon)
-    date_obj = Datetime(date_str, time_str, tz_name)
+    date_obj = Datetime(date_str, time_str, tz_offset)
     chart = Chart(date_obj, pos)
 
+    # Collect planetary signs
     planets = [
         const.SUN, const.MOON, const.MERCURY, const.VENUS, const.MARS,
         const.JUPITER, const.SATURN, const.URANUS, const.NEPTUNE, const.PLUTO
     ]
     birth_data = {p: chart.get(p).sign for p in planets}
 
+    # Moon phase
     jd = swe.julday(
         dt_local.year, dt_local.month, dt_local.day,
         dt_local.hour + dt_local.minute / 60.0
     )
     frac, angle = get_moon_phase(jd)
-    # Determine phase name
     if angle < 45:
         phase_name = "New Moon"
     elif angle < 90:
