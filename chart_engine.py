@@ -8,17 +8,17 @@ import requests, pytz, datetime, swisseph as swe, math, openai
 swe.set_ephe_path('.')  # Ensure ephemeris data is available here
 
 def get_geo_and_tz(city):
-    geo = Nominatim(user_agent="astro_gpt").geocode(city)
+    geo = Nominatim(user_agent='astro_gpt').geocode(city)
     if not geo:
-        raise ValueError(f"Location not found: {city}")
+        raise ValueError(f'Location not found: {city}')
     resp = requests.get(
-        "https://timeapi.io/api/TimeZone/coordinate",
-        params={"latitude": geo.latitude, "longitude": geo.longitude}
+        'https://timeapi.io/api/TimeZone/coordinate',
+        params={'latitude': geo.latitude, 'longitude': geo.longitude}
     )
     resp.raise_for_status()
-    tz = resp.json().get("timeZone")
+    tz = resp.json().get('timeZone')
     if not tz:
-        raise ValueError("Timezone lookup failed")
+        raise ValueError('Timezone lookup failed')
     return geo.latitude, geo.longitude, tz
 
 def get_moon_phase(jd):
@@ -51,18 +51,18 @@ def generate_chart(name, bd, bt, bp):
 
     jd = swe.julday(loc.year, loc.month, loc.day,
                     loc.hour + loc.minute / 60.0)
-    frac, angle = get_moon_phase(jd)
+    frac, ang = get_moon_phase(jd)
     phases = [
         "New Moon", "First Quarter", "Waxing Gibbous", "Full Moon",
         "Waning Gibbous", "Last Quarter", "Waning Crescent"
     ]
-    idx = int((angle % 360) // 45)
+    idx = int((ang % 360) // 45)
     phase = phases[idx]
 
     return {
         "chart": data,
         "moon_phase": phase,
-        "moon_phase_angle": round(angle, 2),
+        "moon_phase_angle": round(ang, 2),
         "name": name
     }
 
