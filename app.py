@@ -1,8 +1,16 @@
-from flask import Flask, render_template, request
-from chart_engine import generate_chart, interpret_chart_with_gpt
+from flask import Flask, render_template, request, make_response
+import traceback
 import os
 
+from chart_engine import generate_chart, interpret_chart_with_gpt
+
 app = Flask(__name__)
+
+# Global error handler to display full Python tracebacks in the browser
+@app.errorhandler(Exception)
+def show_traceback(exc):
+    tb = traceback.format_exc()
+    return make_response(f"<pre>{tb}</pre>", 500)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -42,4 +50,5 @@ def index():
 
 if __name__ == "__main__":
     from os import environ
+    # Use 0.0.0.0 so Render (or any host) can route traffic in
     app.run(host="0.0.0.0", port=int(environ.get("PORT", 5000)))
